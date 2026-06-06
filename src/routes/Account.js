@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
+const qs = require('querystring');
 
 const Axios = require('../handler/Axios');
 const Admin = require('../model/admin');
@@ -23,7 +24,7 @@ module.exports = async (app, options) => {
       // verify idToken กับ LINE
       const api_data = await axios.post(
         `https://api.line.me/oauth2/v2.1/verify`,
-        { id_token: idToken, client_id: CHANNEL_ID },
+        qs.stringify({ id_token: idToken, client_id: CHANNEL_ID }),
         { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
       );
       const data = api_data.data;
@@ -68,7 +69,7 @@ module.exports = async (app, options) => {
 
       const api_data = await axios.post(
         `https://api.line.me/oauth2/v2.1/verify`,
-        { id_token: idToken, client_id: CHANNEL_ID },
+        qs.stringify({ id_token: idToken, client_id: CHANNEL_ID }),
         { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
       );
       const data = api_data.data;
@@ -84,9 +85,9 @@ module.exports = async (app, options) => {
         return res.code(403).send({ message: 'not_registered' });
 
       if (!isNaN(+psubuddy.psupassport)) {
-        return jwtSign({ base: 'student', _id: psubuddy.psupassport, lineId: data.sub });
+        return res.send(jwtSign({ base: 'student', _id: psubuddy.psupassport, lineId: data.sub }));
       } else {
-        return jwtSign({ base: 'personnel', _id: psubuddy.psupassport, lineId: data.sub });
+        return res.send(jwtSign({ base: 'personnel', _id: psubuddy.psupassport, lineId: data.sub }));
       }
     } catch (error) {
       console.log(error);
@@ -105,9 +106,9 @@ module.exports = async (app, options) => {
       const admin = await Admin.findOne({ psuId: data.psu_id });
       if (admin) {
         if (data.psu_id.length === 10) {
-          return jwtSign({ base: 'student', _id: admin._id });
+          return res.send(jwtSign({ base: 'student', _id: admin._id }));
         } else {
-          return jwtSign({ base: 'personnel', _id: admin._id });
+          return res.send(jwtSign({ base: 'personnel', _id: admin._id }));
         }
       }
       return res.code(409).send({ message: langs.accessIsNotAllowed });
@@ -127,7 +128,7 @@ module.exports = async (app, options) => {
         const url = `Personnel/GetStaffDetailsByOrgUnit/${admin.psuId}`;
         const [adminApi] = (await Axios.psu.get(url)).data.data;
         const data = { ...adminApi, ...admin };
-        return toUser('personnel', data);
+        return res.send(toUser('personnel', data));
       } else if (base === 'student') {
         const student = await Admin.findById(_id).lean();
         if (!student)
@@ -135,7 +136,7 @@ module.exports = async (app, options) => {
         const url = `regist/Student/${student.psuId}`;
         const [studentApi] = (await Axios.psu.get(url)).data.data;
         const data = { ...studentApi, ...student };
-        return toUser('student', data);
+        return res.send(toUser('student', data));
       }
       return res.code(499).send({ message: langs.invalidToken });
     } catch (error) {
@@ -154,7 +155,7 @@ module.exports = async (app, options) => {
           const userData = await psuapiservice.getPSUDetails(base, _id);
           if (!userData)
             return res.code(404).send({ message: langs.invalidCredentials });
-          return userData;
+          return res.send(userData);
         }
         return res.code(499).send({ message: langs.invalidToken });
       } catch (error) {
