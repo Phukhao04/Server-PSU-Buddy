@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "main": "src/app.js",
-  "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
-  },
+"scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+},
   "dependencies": {
     "@fastify/auth": "^5.0.4",
     "@fastify/basic-auth": "^6.2.0",
