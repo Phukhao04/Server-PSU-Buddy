@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Master Fastify API FOR ADMIN
+  description: เอกสารประกอบ API สำหรับโปรเจกต์ Master Fastify
+  version: 1.0.0
+tags:
+  - name: Upload
+    description: API สำหรับการอัปโหลดไฟล์ ใช้งานได้ยากอยู่
+paths:
+  /upload/single:
+    post:
+      tags:
+        - Upload
+      summary: อัปโหลดไฟล์เดียวหรือหลายไฟล์
+      description: |-
+        รองรับการอัปโหลดไฟล์ผ่าน multipart/form-data
+        โดยสามารถอัปโหลดได้สูงสุด 10 ไฟล์ภายใต้ชื่อฟิลด์ `myFiles`
+        และสามารถส่งข้อมูลฟอร์มอื่นๆ มาพร้อมกันได้
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - myFiles
+              properties:
+                myFiles:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: ไฟล์ที่ต้องการอัปโหลด (สูงสุด 10 ไฟล์)
+                description:
+                  type: string
+                  description: คำอธิบายเกี่ยวกับไฟล์ที่อัปโหลด
+      responses:
+        "200":
+          description: อัปโหลดไฟล์สำเร็จ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Files uploaded successfully!"
+                  files:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UploadedFile"
+                  formData:
+                    type: object
+                    description: ข้อมูลฟอร์มอื่นๆ ที่ส่งมาพร้อมกับไฟล์
+                    additionalProperties: true
+        "400":
+          description: Bad Request เช่น ไม่ได้อัปโหลดไฟล์ใดๆ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    UploadedFile:
+      type: object
+      properties:
+        originalname:
+          type: string
+          example: "my-image.jpg"
+        filename:
+          type: string
+          example: "1678886400000-my-image.jpg"
+        size:
+          type: number
+          example: 102400
+        mimetype:
+          type: string
+          example: "image/jpeg"
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 400
+        error:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "No files were uploaded."

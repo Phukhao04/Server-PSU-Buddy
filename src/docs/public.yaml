@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: Master Fastify API FOR PUBLIC
+  description: เอกสารประกอบ API สำหรับโปรเจกต์ Master Fastify
+  version: 1.0.0
+paths:
+  /user:
+    get:
+      summary: ดึงข้อมูลโปรไฟล์ผู้ใช้
+      description: ดึงข้อมูลโปรไฟล์ของผู้ใช้ที่เข้าสู่ระบบอยู่ โดยข้อมูลจะถูกถอดรหัสจาก JWT
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ข้อมูลโปรไฟล์ผู้ใช้
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  psuid:
+                    type: string
+                  iat:
+                    type: number
+                  exp:
+                    type: number
+        "401":
+          description: Unauthorized (หากไม่มี token หรือ token ไม่ถูกต้อง)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /user/list:
+    get:
+      summary: ดึงรายชื่อผู้ใช้ทั้งหมด
+      description: ดึงรายชื่อผู้ใช้ทั้งหมดจากฐานข้อมูล ในการใช้งานจริง ควรจำกัดสิทธิ์ให้เฉพาะผู้ดูแลระบบเท่านั้น
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: รายชื่อผู้ใช้ทั้งหมด
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    psuid:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+        "401":
+          description: Unauthorized (หากไม่มี token หรือ token ไม่ถูกต้อง)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /user/register:
+    post:
+      summary: ลงทะเบียนผู้ใช้ใหม่
+      description: สร้างบัญชีผู้ใช้ใหม่ในระบบ
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - psuid
+              properties:
+                psuid:
+                  type: string
+                  description: รหัส PSU ที่ไม่ซ้ำกันของผู้ใช้
+      responses:
+        "201":
+          description: สร้างผู้ใช้สำเร็จ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      psuid:
+                        type: string
+        "409":
+          description: Conflict (psuid ซ้ำ)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /user/login:
+    post:
+      summary: เข้าสู่ระบบ
+      description: ยืนยันตัวตนผู้ใช้และส่งคืน JWT token สำหรับการร้องขอในครั้งถัดไป
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - psuid
+              properties:
+                psuid:
+                  type: string
+                  description: รหัส PSU ของผู้ใช้สำหรับเข้าสู่ระบบ
+      responses:
+        "200":
+          description: เข้าสู่ระบบสำเร็จ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+        "404":
+          description: Not Found (ไม่พบผู้ใช้)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  error:
+                    type: string
+                  message:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: ใส่ Token ในรูปแบบ "Bearer {token}"

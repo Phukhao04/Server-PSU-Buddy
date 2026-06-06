@@ -1,0 +1,818 @@
+[
+  {
+    "field_name": "studentId",
+    "field_api": ["studentId"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสนักศึกษา",
+      "en": "Student ID"
+    },
+    "description": "รหัสนักศึกษา - Student ID (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "titleId",
+    "field_api": ["titleId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสคำนำหน้าชื่อ",
+      "en": "Title ID"
+    },
+    "description": "รหัสคำนำหน้าชื่อ - Title ID (LV3 only)"
+  },
+  {
+    "field_name": "titleNameThai",
+    "field_api": ["titleName", "titleNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "คำนำหน้าชื่อ",
+      "en": "Thai title name"
+    },
+    "description": "คำนำหน้าชื่อภาษาไทย - Thai title name (LV1: titleName, LV3: titleNameThai)"
+  },
+  {
+    "field_name": "titleNameEng",
+    "field_api": ["titleShortEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "คำนำหน้าชื่อ (อังกฤษ)",
+      "en": "English title abbreviation"
+    },
+    "description": "ชื่อย่อคำนำหน้าชื่อภาษาอังกฤษ - English title abbreviation (LV3 only)"
+  },
+  {
+    "field_name": "sexCode",
+    "field_api": ["sexCode"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสเพศ",
+      "en": "Gender code"
+    },
+    "description": "รหัสของเพศ - Gender code (LV3 only)"
+  },
+  {
+    "field_name": "studNameThai",
+    "field_api": ["studNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อนักศึกษา (ไทย)",
+      "en": "Thai student first name"
+    },
+    "description": "ชื่อนักศึกษาภาษาไทย - Thai student first name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "studSnameThai",
+    "field_api": ["studSnameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "นามสกุลนักศึกษา (ไทย)",
+      "en": "Thai student last name"
+    },
+    "description": "นามสกุลนักศึกษาภาษาไทย - Thai student last name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "studNameEng",
+    "field_api": ["studNameEng"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อนักศึกษา (อังกฤษ)",
+      "en": "English student first name"
+    },
+    "description": "ชื่อนักศึกษาภาษาอังกฤษ - English student first name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "studSnameEng",
+    "field_api": ["studSnameEng"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "นามสกุลนักศึกษา (อังกฤษ)",
+      "en": "English student last name"
+    },
+    "description": "นามสกุลนักศึกษาภาษาอังกฤษ - English student last name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "yearStatus",
+    "field_api": ["yearStatus"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "สถานะชั้นปี",
+      "en": "Year status"
+    },
+    "description": "สถานะชั้นปี - Year status (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "campusId",
+    "field_api": ["campusId"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสวิทยาเขต",
+      "en": "Campus ID"
+    },
+    "description": "รหัสวิทยาเขตที่สังกัด - Campus ID (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "campusNameThai",
+    "field_api": ["campusNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิทยาเขต (ไทย)",
+      "en": "Thai campus name"
+    },
+    "description": "ชื่อวิทยาเขตที่สังกัด - Thai campus name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "campusNameEng",
+    "field_api": ["campusNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิทยาเขต (อังกฤษ)",
+      "en": "English campus name"
+    },
+    "description": "ชื่อวิทยาเขตที่สังกัดภาษาอังกฤษ - English campus name (LV3 only)"
+  },
+  {
+    "field_name": "facId",
+    "field_api": ["facId"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสคณะ",
+      "en": "Faculty ID"
+    },
+    "description": "รหัสคณะที่สังกัด - Faculty ID (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "facNameThai",
+    "field_api": ["facNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อคณะ (ไทย)",
+      "en": "Thai faculty name"
+    },
+    "description": "ชื่อคณะที่สังกัด - Thai faculty name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "facNameEng",
+    "field_api": ["facNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อคณะ (อังกฤษ)",
+      "en": "English faculty name"
+    },
+    "description": "ชื่อคณะที่สังกัดภาษาอังกฤษ - English faculty name (LV3 only)"
+  },
+  {
+    "field_name": "deptId",
+    "field_api": ["deptId"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสภาควิชา",
+      "en": "Department ID"
+    },
+    "description": "รหัสภาควิชาที่สังกัด - Department ID (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "deptNameThai",
+    "field_api": ["deptNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อภาควิชา (ไทย)",
+      "en": "Thai department name"
+    },
+    "description": "ชื่อภาควิชาที่สังกัด - Thai department name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "deptNameEng",
+    "field_api": ["deptNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อภาควิชา (อังกฤษ)",
+      "en": "English department name"
+    },
+    "description": "ชื่อภาควิชาที่สังกัดภาษาอังกฤษ - English department name (LV3 only)"
+  },
+  {
+    "field_name": "nationality",
+    "field_api": ["nationality"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ประเภทนักศึกษา",
+      "en": "Student type"
+    },
+    "description": "รหัสประเภทของนักศึกษา T:นักศึกษาไทย F:นักศึกษาต่างชาติ - Student type (T: Thai, F: Foreign) (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "majorId",
+    "field_api": ["majorId"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสสาขาวิชา",
+      "en": "Major ID"
+    },
+    "description": "รหัสสาขาวิชาที่สังกัด - Major ID (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "majorNameThai",
+    "field_api": ["majorNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อสาขาวิชา (ไทย)",
+      "en": "Thai major name"
+    },
+    "description": "ชื่อสาขาวิชาที่สังกัด - Thai major name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "majorNameEng",
+    "field_api": ["majorNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อสาขาวิชา (อังกฤษ)",
+      "en": "English major name"
+    },
+    "description": "ชื่อสาขาวิชาที่สังกัดภาษาอังกฤษ - English major name (LV3 only)"
+  },
+  {
+    "field_name": "subMajorId",
+    "field_api": ["subMajorId"],
+    "is_searchable": false,
+    "levels": [1],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสวิชาเอก",
+      "en": "Sub-major ID"
+    },
+    "description": "รหัสวิชาเอกที่สังกัด - Sub-major ID (LV1 only)"
+  },
+  {
+    "field_name": "subMajorNameThai",
+    "field_api": ["subMajorNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิชาเอก (ไทย)",
+      "en": "Thai sub-major name"
+    },
+    "description": "ชื่อวิชาเอกที่สังกัดภาษาไทย - Thai sub-major name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "subMajorNameEng",
+    "field_api": ["subMajorNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิชาเอก (อังกฤษ)",
+      "en": "English sub-major name"
+    },
+    "description": "ชื่อวิชาเอกภาษาอังกฤษ - English sub-major name (LV3 only)"
+  },
+  {
+    "field_name": "minorId",
+    "field_api": ["minorId"],
+    "is_searchable": false,
+    "levels": [1],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสวิชาโท",
+      "en": "Minor ID"
+    },
+    "description": "รหัสวิชาโทที่สังกัด - Minor ID (LV1 only)"
+  },
+  {
+    "field_name": "minorNameThai",
+    "field_api": ["minorNameThai"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิชาโท (ไทย)",
+      "en": "Thai minor name"
+    },
+    "description": "ชื่อวิชาโทที่สังกัดภาษาไทย - Thai minor name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "minorNameEng",
+    "field_api": ["minorNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อวิชาโท (อังกฤษ)",
+      "en": "English minor name"
+    },
+    "description": "ชื่อวิชาโทภาษาอังกฤษ - English minor name (LV3 only)"
+  },
+  {
+    "field_name": "studyLevelId",
+    "field_api": ["studyLevelId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสระดับการศึกษา",
+      "en": "Study level ID"
+    },
+    "description": "รหัสระดับการศึกษา - Study level ID (LV3 only)"
+  },
+  {
+    "field_name": "studyLevelName",
+    "field_api": ["studyLevelName"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ระดับการศึกษา",
+      "en": "Study level name"
+    },
+    "description": "ระดับการศึกษา - Study level name (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "stillStudent",
+    "field_api": ["stillStudent"],
+    "is_searchable": false,
+    "levels": [1, 3],
+    "field_type": "string",
+    "field_title": {
+      "th": "สถานะการเป็นนักศึกษา",
+      "en": "Student status"
+    },
+    "description": "รหัสสถานะการเป็นนักศึกษา Y:ยังมีสถานะเป็นนักศึกษา N:พ้นสภาพการเป็นนักศึกษา - Student status (Y: Active, N: Inactive) (Available in both LV1 and LV3)"
+  },
+  {
+    "field_name": "entMethod",
+    "field_api": ["entMethod"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสวิธีการเข้าศึกษา",
+      "en": "Entrance method code"
+    },
+    "description": "รหัสวิธีการเข้าศึกษา - Entrance method code (LV3 only)"
+  },
+  {
+    "field_name": "entMethodDesc",
+    "field_api": ["entMethodDesc"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "คำอธิบายวิธีการเข้าศึกษา",
+      "en": "Entrance method description"
+    },
+    "description": "คำอธิบายวิธีการเข้าศึกษา - Entrance method description (LV3 only)"
+  },
+  {
+    "field_name": "groupId",
+    "field_api": ["groupId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสกลุ่ม",
+      "en": "Group ID"
+    },
+    "description": "รหัสกลุ่ม - Group ID (LV3 only)"
+  },
+  {
+    "field_name": "admitTerm",
+    "field_api": ["admitTerm"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ภาคการศึกษาที่เข้าศึกษา",
+      "en": "Admission term"
+    },
+    "description": "ภาคการศึกษาที่เข้าศึกษา - Admission term (LV3 only)"
+  },
+  {
+    "field_name": "admitYear",
+    "field_api": ["admitYear"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ปีที่เข้าศึกษา",
+      "en": "Admission year"
+    },
+    "description": "ปีที่เข้าศึกษา - Admission year (LV3 only)"
+  },
+  {
+    "field_name": "admitDate",
+    "field_api": ["admitDate"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "date",
+    "field_title": {
+      "th": "วันที่เข้าศึกษา",
+      "en": "Admission date"
+    },
+    "description": "วันที่เข้าศึกษา - Admission date (LV3 only)"
+  },
+  {
+    "field_name": "studyStatus",
+    "field_api": ["studyStatus"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสสถานะนักศึกษา",
+      "en": "Study status code"
+    },
+    "description": "รหัสสถานะนักศึกษา - Study status code (LV3 only)"
+  },
+  {
+    "field_name": "statusDescThai",
+    "field_api": ["statusDescThai"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "คำอธิบายสถานะนักศึกษา",
+      "en": "Study status description"
+    },
+    "description": "คำอธิบายสถานะนักศึกษา - Study status description (LV3 only)"
+  },
+  {
+    "field_name": "citizenId",
+    "field_api": ["citizenId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสบัตรประชาชน",
+      "en": "Citizen ID"
+    },
+    "description": "รหัสบัตรประชาชน - Citizen ID (LV3 only) - Sensitive data, not searchable"
+  },
+  {
+    "field_name": "coursePlanId",
+    "field_api": ["coursePlanId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสแผนของหลักสูตร",
+      "en": "Course plan ID"
+    },
+    "description": "รหัสแผนของหลักสูตร - Course plan ID (LV3 only)"
+  },
+  {
+    "field_name": "studyTypeId",
+    "field_api": ["studyTypeId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสประเภทการเรียน",
+      "en": "Study type ID"
+    },
+    "description": "รหัสประเภทการเรียน - Study type ID (LV3 only)"
+  },
+  {
+    "field_name": "studyTypeName",
+    "field_api": ["studyTypeName"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "คำอธิบายประเภทการเรียน",
+      "en": "Study type description"
+    },
+    "description": "คำอธิบายประเภทการเรียน - Study type description (LV3 only)"
+  },
+  {
+    "field_name": "studyPlanId",
+    "field_api": ["studyPlanId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสแผนการศึกษา",
+      "en": "Study plan ID"
+    },
+    "description": "รหัสแผนการศึกษา - Study plan ID (LV3 only)"
+  },
+  {
+    "field_name": "studyPlanName",
+    "field_api": ["studyPlanName"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อแผนการศึกษา",
+      "en": "Study plan name"
+    },
+    "description": "ชื่อแผนการศึกษา - Study plan name (LV3 only)"
+  },
+  {
+    "field_name": "coursePlanDetail",
+    "field_api": ["coursePlanDetail"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รายละเอียดแผนของหลักสูตร",
+      "en": "Course plan details"
+    },
+    "description": "รายละเอียดแผนของหลักสูตร - Course plan details (LV3 only)"
+  },
+  {
+    "field_name": "regularYear",
+    "field_api": ["regularYear"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "number",
+    "field_title": {
+      "th": "ระยะเวลาการศึกษา",
+      "en": "Regular study duration"
+    },
+    "description": "ระยะเวลาการศึกษา - Regular study duration (LV3 only)"
+  },
+  {
+    "field_name": "expandYear",
+    "field_api": ["expandYear"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "number",
+    "field_title": {
+      "th": "ระยะเวลาการศึกษาที่ขยายได้",
+      "en": "Extended study duration"
+    },
+    "description": "ระยะเวลาการศึกษา ที่ขยายได้ - Extended study duration (LV3 only)"
+  },
+  {
+    "field_name": "courseCategoryId",
+    "field_api": ["courseCategoryId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสประเภทหลักสูตร",
+      "en": "Course category ID"
+    },
+    "description": "รหัสประเภทหลักสูตร - Course category ID (LV3 only)"
+  },
+  {
+    "field_name": "courseCategoryNameThai",
+    "field_api": ["courseCategoryNameThai"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อประเภทหลักสูตร (ไทย)",
+      "en": "Thai course category name"
+    },
+    "description": "ชื่อประเภทหลักสูตรภาษาไทย - Thai course category name (LV3 only)"
+  },
+  {
+    "field_name": "courseCategoryNameEng",
+    "field_api": ["courseCategoryNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อประเภทหลักสูตร (อังกฤษ)",
+      "en": "English course category name"
+    },
+    "description": "ชื่อประเภทหลักสูตรภาษาอังกฤษ - English course category name (LV3 only)"
+  },
+  {
+    "field_name": "degreeId",
+    "field_api": ["degreeId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสปริญญา",
+      "en": "Degree ID"
+    },
+    "description": "รหัสปริญญา - Degree ID (LV3 only)"
+  },
+  {
+    "field_name": "degreeNameThai",
+    "field_api": ["degreeNameThai"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อปริญญา (ไทย)",
+      "en": "Thai degree name"
+    },
+    "description": "ชื่อปริญญาภาษาไทย - Thai degree name (LV3 only)"
+  },
+  {
+    "field_name": "degreeNameEng",
+    "field_api": ["degreeNameEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อปริญญา (อังกฤษ)",
+      "en": "English degree name"
+    },
+    "description": "ชื่อปริญญาภาษาอังกฤษ - English degree name (LV3 only)"
+  },
+  {
+    "field_name": "gradYear",
+    "field_api": ["gradYear"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ปีการศึกษาที่จบ",
+      "en": "Graduation year"
+    },
+    "description": "ปีการศึกษาที่จบ - Graduation year (LV3 only)"
+  },
+  {
+    "field_name": "gradDate",
+    "field_api": ["gradDate"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "date",
+    "field_title": {
+      "th": "วันที่สำเร็จการศึกษา",
+      "en": "Graduation date"
+    },
+    "description": "วันที่สำเร็จการศึกษา - Graduation date (LV3 only)"
+  },
+  {
+    "field_name": "honourId",
+    "field_api": ["honourId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสเกียรตินิยม",
+      "en": "Honor ID"
+    },
+    "description": "รหัสเกียรตินิยม - Honor ID (LV3 only)"
+  },
+  {
+    "field_name": "honourDetail",
+    "field_api": ["honourDetail"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รายละเอียดเกียรตินิยม",
+      "en": "Honor details"
+    },
+    "description": "รายละเอียดเกียรตินิยม - Honor details (LV3 only)"
+  },
+  {
+    "field_name": "oecDate",
+    "field_api": ["oecDate"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "date",
+    "field_title": {
+      "th": "วันที่สภาอนุมัติ",
+      "en": "OEC approval date"
+    },
+    "description": "วันที่สภาอนุมัติ - OEC approval date (LV3 only)"
+  },
+  {
+    "field_name": "birthDate",
+    "field_api": ["birthDate"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "date",
+    "field_title": {
+      "th": "วันเดือนปีที่เกิด",
+      "en": "Birth date"
+    },
+    "description": "วันเดือนปีที่เกิด - Birth date (LV3 only) - Sensitive data, not searchable"
+  },
+  {
+    "field_name": "birthPlaceThai",
+    "field_api": ["birthPlaceThai"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "จังหวัดที่เกิด (ไทย)",
+      "en": "Thai birth place"
+    },
+    "description": "จังหวัดที่เกิดภาษาไทย - Thai birth place (LV3 only)"
+  },
+  {
+    "field_name": "birthPlaceEng",
+    "field_api": ["birthPlaceEng"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "จังหวัดที่เกิด (อังกฤษ)",
+      "en": "English birth place"
+    },
+    "description": "จังหวัดที่เกิดภาษาอังกฤษ - English birth place (LV3 only)"
+  },
+  {
+    "field_name": "phone",
+    "field_api": ["phone"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "หมายเลขโทรศัพท์",
+      "en": "Phone number"
+    },
+    "description": "หมายเลขโทรศัพท์ - Phone number (LV3 only) - Sensitive data, not searchable"
+  },
+  {
+    "field_name": "email",
+    "field_api": ["email"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "อีเมล",
+      "en": "Email address"
+    },
+    "description": "รหัสอีเมล - Email address (LV3 only) - Sensitive data, not searchable"
+  },
+  {
+    "field_name": "nationalityId",
+    "field_api": ["nationalityId"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "รหัสสัญชาติ",
+      "en": "Nationality ID"
+    },
+    "description": "รหัสสัญชาติของนักศึกษา - Nationality ID (LV3 only)"
+  },
+  {
+    "field_name": "nationalityName",
+    "field_api": ["nationalityName"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "ชื่อสัญชาติ",
+      "en": "Nationality name"
+    },
+    "description": "คำอธิบายรหัสสัญชาติ - Nationality name (LV3 only)"
+  },
+  {
+    "field_name": "yearlyRegist",
+    "field_api": ["yearlyRegist"],
+    "is_searchable": false,
+    "levels": [3],
+    "field_type": "string",
+    "field_title": {
+      "th": "การลงทะเบียนรายปี",
+      "en": "Yearly registration"
+    },
+    "description": "การลงทะเบียนรายปี - Yearly registration (LV3 only)"
+  }
+]
