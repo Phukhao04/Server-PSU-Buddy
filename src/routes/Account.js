@@ -12,60 +12,91 @@ const { TOKEN_KEY, service_id, service_secret, tokenmeUrl, CHANNEL_ID } =
   process.env;
 
 module.exports = async (app, options) => {
-  app.post('/liff/verify', async (req, res) => {
+
+  // ── ลงทะเบียนผูกบัญชี ─────────────────────────────────────────
+  app.post('/liff/register', async (req, res) => {
     try {
-      const { idToken } = req.body;
-      if (!idToken)
-        return res.code(400).send({ message: 'idToken is required.' });
+      const { idToken, psuId } = req.body;
+      if (!idToken || !psuId)
+        return res.code(400).send({ message: 'idToken and psuId are required.' });
+
+      // verify idToken กับ LINE
       const api_data = await axios.post(
         `https://api.line.me/oauth2/v2.1/verify`,
-        {
-          id_token: idToken,
-          client_id: CHANNEL_ID,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        },
+        { id_token: idToken, client_id: CHANNEL_ID },
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
       );
       const data = api_data.data;
       if (!data || !data.sub)
         return res.code(409).send({ message: langs.accessIsNotAllowed });
 
-      // return res.send(data);
+      // เช็คว่ามีอยู่แล้วไหม
+      const existing = await dbPsuBuddy
+        .collection('CBSUser')
+        .findOne({ userId: data.sub });
+      if (existing)
+        return res.code(409).send({ message: 'already_registered' });
+
+      // verify psuId กับ PSU API ว่ามีอยู่จริงไหม
+      const psuCheck = await psuapiservice.getPSUDetails(
+        isNaN(+psuId) ? 'personnel' : 'student',
+        psuId
+      );
+      if (!psuCheck)
+        return res.code(404).send({ message: 'psu_not_found' });
+
+      // บันทึกลง CBSUser
+      await dbPsuBuddy.collection('CBSUser').insertOne({
+        userId: data.sub,
+        psupassport: psuId,
+        createdAt: new Date(),
+      });
+
+      return res.send({ message: 'registered_success' });
+    } catch (error) {
+      console.log(error);
+      return res.code(500).send({ message: 'Internal Server Error' });
+    }
+  });
+
+  // ── verify LIFF token ──────────────────────────────────────────
+  app.post('/liff/verify', async (req, res) => {
+    try {
+      const { idToken } = req.body;
+      if (!idToken)
+        return res.code(400).send({ message: 'idToken is required.' });
+
+      const api_data = await axios.post(
+        `https://api.line.me/oauth2/v2.1/verify`,
+        { id_token: idToken, client_id: CHANNEL_ID },
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      );
+      const data = api_data.data;
+      if (!data || !data.sub)
+        return res.code(409).send({ message: langs.accessIsNotAllowed });
+
       const psubuddy = await dbPsuBuddy
         .collection('CBSUser')
         .findOne({ userId: data.sub }, { projection: { psupassport: 1 } });
 
-      if (!psubuddy) return res.code(404).send({ message: langs.notFound });
-      // psubuddy.psupassport is number or string
+      // ยังไม่ได้ผูกบัญชี → ให้ไปหน้า register
+      if (!psubuddy)
+        return res.code(403).send({ message: 'not_registered' });
+
       if (!isNaN(+psubuddy.psupassport)) {
-        // is number
-        // if psuId is a student
         return jwtSign({ base: 'student', _id: psubuddy.psupassport, lineId: data.sub });
       } else {
         return jwtSign({ base: 'personnel', _id: psubuddy.psupassport, lineId: data.sub });
       }
-
-      // return res.send(psubuddy);
     } catch (error) {
       console.log(error);
       return res.code(401).send({ message: langs.invalidToken });
     }
   });
-//   app.post('/liff/verify', async (req, res) => {
-//   // MOCK: ข้าม LINE Verify + DB Check ชั่วคราว
-//   return jwtSign({
-//     base: 'student',
-//     _id: '6610210312',
-//     lineId: 'mock',
-//   });
-// });
+
   app.post('/verify', async (req, res) => {
     try {
       const { code } = req.body;
-
       const params = { code, service_id, service_secret };
       const { data } = await axios.post(tokenmeUrl, params);
 
@@ -74,7 +105,6 @@ module.exports = async (app, options) => {
       const admin = await Admin.findOne({ psuId: data.psu_id });
       if (admin) {
         if (data.psu_id.length === 10) {
-          // if psuId is a student
           return jwtSign({ base: 'student', _id: admin._id });
         } else {
           return jwtSign({ base: 'personnel', _id: admin._id });
@@ -94,7 +124,6 @@ module.exports = async (app, options) => {
         const admin = await Admin.findById(_id).lean();
         if (!admin)
           return res.code(404).send({ message: langs.invalidCredentials });
-
         const url = `Personnel/GetStaffDetailsByOrgUnit/${admin.psuId}`;
         const [adminApi] = (await Axios.psu.get(url)).data.data;
         const data = { ...adminApi, ...admin };
@@ -103,7 +132,6 @@ module.exports = async (app, options) => {
         const student = await Admin.findById(_id).lean();
         if (!student)
           return res.code(404).send({ message: langs.invalidCredentials });
-
         const url = `regist/Student/${student.psuId}`;
         const [studentApi] = (await Axios.psu.get(url)).data.data;
         const data = { ...studentApi, ...student };
@@ -116,44 +144,25 @@ module.exports = async (app, options) => {
     }
   });
 
-  // app.post(
-  //   '/liff/auth',
-  //   { preHandler: [app.verifyLiffToken] },
-  //   async (req, res) => {
-  //     try {
-  //       const { base, _id } = req.user;
-  //       if (base === 'personnel' || base === 'student') {
-  //         const userData = await psuapiservice.getPSUDetails(base, _id);
-  //         if (!userData)
-  //           return res.code(404).send({ message: langs.invalidCredentials });
-  //         return userData;
-  //       }
-  //       return res.code(499).send({ message: langs.invalidToken });
-  //     } catch (error) {
-  //       console.log(error);
-  //       return res.code(499).send({ message: langs.invalidToken });
-  //     }
-  //   },
-  // );
   app.post(
-  '/liff/auth',
-  { preHandler: [app.verifyLiffToken] },
-  async (req, res) => {
-    try {
-      const { base, _id } = req.user;
-      if (base === 'personnel' || base === 'student') {
-        const userData = await psuapiservice.getPSUDetails(base, _id);
-        if (!userData)
-          return res.code(404).send({ message: langs.invalidCredentials });
-        return userData;
+    '/liff/auth',
+    { preHandler: [app.verifyLiffToken] },
+    async (req, res) => {
+      try {
+        const { base, _id } = req.user;
+        if (base === 'personnel' || base === 'student') {
+          const userData = await psuapiservice.getPSUDetails(base, _id);
+          if (!userData)
+            return res.code(404).send({ message: langs.invalidCredentials });
+          return userData;
+        }
+        return res.code(499).send({ message: langs.invalidToken });
+      } catch (error) {
+        console.log(error);
+        return res.code(499).send({ message: langs.invalidToken });
       }
-      return res.code(499).send({ message: langs.invalidToken });
-    } catch (error) {
-      console.log(error);
-      return res.code(499).send({ message: langs.invalidToken });
     }
-  },
-);
+  );
 
   app.get('/account/test', (req, res) => {
     res.send({ message: 'Account works!' });
